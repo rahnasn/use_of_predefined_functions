@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript predefined function String and Math </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #0056b3;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 5px;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #0056b3;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #004085;
+        }
+        .demo-box {
+            background: #eef2f7;
+            padding: 15px;
+            border-left: 4px solid #0056b3;
+            margin-top: 15px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>JavaScript predefined function String and Math </h1>
+    <p>Type your own values below and click the buttons to see how predefined JavaScript functions manipulate your inputs in real time.</p>
+
+    <!-- Interactive String Section -->
+    <div class="section">
+        <h2>1. Test String Functions</h2>
+        <div class="input-group">
+            <label for="strInput">Enter a custom text string (try adding spaces at the beginning or end):</label>
+            <input type="text" id="strInput" value="   Learning JavaScript is Fun!   ">
+        </div>
+        <button onclick="runStringDemo()">Process String</button>
+        <div class="demo-box" id="string-output">Click the button above to view results...</div>
+    </div>
+
+    <!-- Interactive Math Section -->
+    <div class="section">
+        <h2>2. Test Math Functions</h2>
+        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+            <div class="input-group" style="flex: 1; min-width: 200px;">
+                <label for="numInput1">Enter Number A (Decimal or Negative):</label>
+                <input type="number" id="numInput1" value="-5.75" step="any">
+            </div>
+            <div class="input-group" style="flex: 1; min-width: 200px;">
+                <label for="numInput2">Enter Number B (e.g., Exponent Base):</label>
+                <input type="number" id="numInput2" value="2" step="any">
+            </div>
+            <div class="input-group" style="flex: 1; min-width: 200px;">
+                <label for="numInput3">Enter Number C (e.g., Power):</label>
+                <input type="number" id="numInput3" value="3" step="any">
+            </div>
+        </div>
+        <button onclick="runMathDemo()">Calculate Math</button>
+        <div class="demo-box" id="math-output">Click the button above to view results...</div>
+    </div>
+</div>
+
+<script>
+    function runStringDemo() {
+        // Get user input value
+        let userStr = document.getElementById("strInput").value;
+        let results = "";
+
+        results += `Analyzed String : "${userStr}"\n`;
+        results += `--------------------------------------------------------\n`;
+        results += `length (property)           : ${userStr.length}\n`;
+        results += `trim()                      : "${userStr.trim()}" (Removes outside whitespace)\n`;
+        results += `toUpperCase()               : "${userStr.toUpperCase()}"\n`;
+        results += `toLowerCase()               : "${userStr.toLowerCase()}"\n`;
+        results += `charAt(5)                   : "${userStr.charAt(5)}" (Character at index 5)\n`;
+        results += `indexOf("Java")             : ${userStr.indexOf("Java")} (-1 means not found)\n`;
+        results += `slice(3, 11)                : "${userStr.slice(3, 11)}"\n`;
+        results += `includes("JavaScript")      : ${userStr.includes("JavaScript")}\n`;
+        
+        // Output to page
+        document.getElementById("string-output").textContent = results;
+    }
+
+    function runMathDemo() {
+        // Get user inputs and parse them as floats
+        let a = parseFloat(document.getElementById("numInput1").value);
+        let b = parseFloat(document.getElementById("numInput2").value);
+        let c = parseFloat(document.getElementById("numInput3").value);
+        
+        // Handle potential invalid inputs (NaN)
+        if (isNaN(a) || isNaN(b) || isNaN(c)) {
+            document.getElementById("math-output").textContent = "Please enter valid numeric inputs.";
+            return;
+        }
+
+        let results = "";
+        results += `Inputs: A = ${a}, B = ${b}, C = ${c}\n`;
+        results += `--------------------------------------------------------\n`;
+        results += `Math.abs(A)                 : ${Math.abs(a)} (Absolute positive value)\n`;
+        results += `Math.ceil(A)                : ${Math.ceil(a)} (Rounds up to next integer)\n`;
+        results += `Math.floor(A)               : ${Math.floor(a)} (Rounds down to next integer)\n`;
+        results += `Math.round(A)               : ${Math.round(a)} (Rounds to closest integer)\n`;
+        results += `Math.max(A, B, C)           : ${Math.max(a, b, c)} (Highest value)\n`;
+        results += `Math.min(A, B, C)           : ${Math.min(a, b, c)} (Lowest value)\n`;
+        results += `Math.pow(B, C)              : ${Math.pow(b, c)} (B raised to power C)\n`;
+        
+        // Safe square root check to avoid NaN text if user supplies negative numbers to sqrt
+        results += `Math.sqrt(Math.abs(A))      : ${Math.sqrt(Math.abs(a)).toFixed(4)} (Square root of absolute A)\n`;
+        results += `Math.random()               : ${Math.random().toFixed(4)} (Random value between 0 and 1)\n`;
+        results += `Math.PI (Constant)          : ${Math.PI.toFixed(4)}\n`;
+
+        // Output to page
+        document.getElementById("math-output").textContent = results;
+    }
+
+    // Auto-run demonstrations once on page load
+    window.onload = function() {
+        runStringDemo();
+        runMathDemo();
+    };
+</script>
+
+</body>
+</html>
